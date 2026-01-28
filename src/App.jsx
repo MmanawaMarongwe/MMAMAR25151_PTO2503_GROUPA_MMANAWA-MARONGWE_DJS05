@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
 import { fetchPodcasts } from "./api/fetchPodcasts";
-import PodcastGrid from "./components/PodcastGrid";
+import { PodcastGrid, Filters } from "./components/index";
 import { PodcastProvider } from "./utils/PodcastContext";
-import Header from "./components/Header";
-import Filters from "./components/Filters";
-import ErrorBoundary from "./components/ErrorBoundary";
-import Pagination from "./components/Pagination";
+import { ErrorBoundary, Header, Pagination } from "./UI/index";
 import "./App.css";
 
 export default function App() {
@@ -22,7 +19,7 @@ export default function App() {
         const podcastsArray = await fetchPodcasts(
           setPodcasts,
           setError,
-          setLoading
+          setLoading,
         );
         if (Array.isArray(podcastsArray)) setPodcasts(podcastsArray);
       } catch (err) {
