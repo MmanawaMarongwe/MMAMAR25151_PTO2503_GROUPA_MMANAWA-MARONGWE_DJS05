@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { PodcastContext } from "../utils/PodcastContext";
+import { PodcastContext } from "../context/PodcastContext";
 
 export default function Pagination() {
   const { page, setPage, totalPages } = useContext(PodcastContext);
@@ -8,7 +8,7 @@ export default function Pagination() {
 
   const pageNumbers = Array.from(
     { length: totalPages },
-    (unused, index) => index + 1
+    (unused, index) => index + 1,
   );
 
   return (

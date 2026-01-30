@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { PodcastContext } from "../utils/PodcastContext";
+import { PodcastContext } from "../context/PodcastContext";
 import { genres } from "../data.js";
 
 export default function Filters() {
