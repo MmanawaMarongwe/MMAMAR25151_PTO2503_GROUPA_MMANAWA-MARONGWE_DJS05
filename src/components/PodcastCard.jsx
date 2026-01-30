@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 /**
  * Simple presentational card for a single podcast.
  *
@@ -11,6 +13,7 @@
  */
 
 export default function PodcastCard({
+  id,
   title,
   image,
   seasons,
@@ -18,7 +21,7 @@ export default function PodcastCard({
   updated,
 }) {
   return (
-    <div className="card">
+    <Link to={`/show/${id}`} className="card">
       <img src={image} className="pod-cover" alt="" />
       <div>
         <h4 id="title">{title}</h4>
@@ -36,6 +39,6 @@ export default function PodcastCard({
           Updated {updated}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }

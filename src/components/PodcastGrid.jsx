@@ -3,7 +3,7 @@ import PodcastCard from "./PodcastCard";
 import { dateFormat } from "../utils/dateFormat.js";
 import { genreList } from "../utils/genreList.js";
 import { genres } from "../data.js";
-import { PodcastContext } from "../utils/PodcastContext.jsx";
+import { PodcastContext } from "../context/PodcastContext.jsx";
 
 export default function PodcastGrid() {
   const { podcasts = [] } = useContext(PodcastContext);
@@ -11,6 +11,7 @@ export default function PodcastGrid() {
   const podcastElements = podcasts.map((podcast) => (
     <PodcastCard
       key={podcast.id}
+      id={podcast.id}
       title={podcast.title}
       image={podcast.image}
       seasons={podcast.seasons}
