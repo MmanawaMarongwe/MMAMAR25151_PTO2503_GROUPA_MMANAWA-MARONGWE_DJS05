@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-
+import { useState, useEffect } from "react";
 /**
  * ShowDetail placeholder page.
  * Reuses layout styles from the previous modal implementation.
@@ -7,6 +7,36 @@ import { Link, useParams } from "react-router-dom";
  */
 export default function ShowDetail() {
   const { id } = useParams();
+
+  const [show, setShow] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function fetchShow() {
+      setLoading(true);
+      setError("");
+      setShow(null);
+
+      try {
+        const res = await fetch(`https://podcast-api.netlify.app/id/${id}`);
+        if (!res.ok) throw new Error(`Request failed (${res.status})`);
+        const data = await res.json();
+        if (!ignore) setShow(data);
+      } catch (err) {
+        if (!ignore) setError(err?.message || "Failed to load show details.");
+      } finally {
+        if (!ignore) setLoading(false);
+      }
+    }
+
+    fetchShow();
+    return () => {
+      ignore = true;
+    };
+  }, [id]);
 
   return (
     <main className="show-detail">
@@ -16,6 +46,11 @@ export default function ShowDetail() {
 
       <h2>Podcast Details</h2>
 
+      <h2>
+        {loading && "Loading show…"}
+        {!loading && error && "Error loading show"}
+        {!loading && !error && show && show.title}
+      </h2>
       <div>
         <div className="podcast-info">
           <div className="image-grid">
