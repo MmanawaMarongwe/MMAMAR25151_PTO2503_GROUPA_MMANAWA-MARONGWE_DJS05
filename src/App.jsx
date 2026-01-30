@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import { fetchPodcasts } from "./api/fetchPodcasts";
 import { PodcastGrid, Filters } from "./components/index";
-import { PodcastProvider } from "./utils/PodcastContext";
+import { PodcastProvider } from "./context/PodcastContext";
+import ShowDetail from "./pages/ShowDetail";
 import { ErrorBoundary, Header, Pagination } from "./UI/index";
 import "./App.css";
 
@@ -38,23 +40,35 @@ export default function App() {
       <Header />
 
       <ErrorBoundary>
-        {error && (
-          <p className="error">
-            Error occurred while fetching podcasts: {error}
-          </p>
-        )}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                {error && (
+                  <p className="error">
+                    Error occurred while fetching podcasts: {error}
+                  </p>
+                )}
 
-        {!error && loading && <p>Loading Podcasts</p>}
+                {!error && loading && <p>Loading Podcasts</p>}
 
-        {!error && !loading && (
-          <PodcastProvider initialPodcasts={podcasts}>
-            <Filters />
-            <main>
-              <PodcastGrid />
-              <Pagination />
-            </main>
-          </PodcastProvider>
-        )}
+                {!error && !loading && (
+                  <PodcastProvider initialPodcasts={podcasts}>
+                    <Filters />
+                    <main>
+                      <PodcastGrid />
+                      <Pagination />
+                    </main>
+                  </PodcastProvider>
+                )}
+              </>
+            }
+          />
+
+          {/* SHOW DETAIL PAGE (placeholder for now) */}
+          <Route path="/show/:id" element={<ShowDetail />} />
+        </Routes>
       </ErrorBoundary>
     </>
   );
