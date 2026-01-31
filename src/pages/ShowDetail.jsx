@@ -55,8 +55,12 @@ export default function ShowDetail() {
         <div className="podcast-info">
           <div className="image-grid">
             <img
-              src="https://via.placeholder.com/300"
-              alt="Podcast cover placeholder"
+              src={show?.image || "https://via.placeholder.com/300"}
+              alt={
+                show?.title
+                  ? `${show.title} cover`
+                  : "Podcast cover placeholder"
+              }
               className="modal-image"
             />
           </div>
@@ -64,18 +68,28 @@ export default function ShowDetail() {
           <div className="info-grid">
             <h3>Description</h3>
             <p className="text-muted">
-              This is a placeholder for the podcast description.
+              {show?.description || "Podcast description will appear here."}
               <br />
               <strong>Show ID:</strong> {id}
             </p>
 
             <h3>Genres</h3>
             <div className="genre-tags">
-              <span className="tag">Genre</span>
-              <span className="tag">Genre</span>
+              {show?.genres?.length ? (
+                show.genres.map((genreId) => (
+                  <span className="tag" key={genreId}>
+                    {genreId}
+                  </span>
+                ))
+              ) : (
+                <>
+                  <span className="tag">Genre</span>
+                  <span className="tag">Genre</span>
+                </>
+              )}
             </div>
 
-            <p className="text-muted">Last updated —</p>
+            <p className="text-muted">Last updated {show?.updated || "—"}</p>
           </div>
         </div>
 
