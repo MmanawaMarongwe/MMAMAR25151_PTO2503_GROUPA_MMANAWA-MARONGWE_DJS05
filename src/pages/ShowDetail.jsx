@@ -1,8 +1,7 @@
 import { useParams } from "react-router-dom";
 import { fetchSinglePodcast } from "../api/fetchData";
 import { useState, useEffect } from "react";
-import { dateFormat } from "../utils/dateFormat";
-import {ShowCover, ShowDetailHeader} from "./index"
+import {ShowCover, ShowDetailHeader, ShowInfo} from "./index"
 import "./showDetail.css";
 /**
  * ShowDetail placeholder page.
@@ -40,17 +39,13 @@ useEffect(() => {
           <ShowCover image={show?.image} title={show?.title} />
 
           <div className="info-grid">
-            <h2>
-        {loading && "Loading show…"}
-        {!loading && error && "Error loading show"}
-        {!loading && !error && show && show.title}
-      </h2>
-            <h3>Description</h3>
-            <p className="text-muted">
-              {show?.description || "Podcast description will appear here."}
-              <br />
-              <strong>Show ID:</strong> {id}
-            </p>
+            <ShowInfo title={show?.title} 
+            description={show?.description} 
+            updated={show?.updated} 
+            id={id} 
+            loading={loading} 
+            error={error}/>
+
 
            { /* <h3>Genres</h3>
             <div className="genre-tags">
@@ -68,7 +63,7 @@ useEffect(() => {
               )}
             </div>*/}
 
-            <p className="text-muted">Last updated {dateFormat(show?.updated || "—")}</p>
+
           </div>
         </div>
 
