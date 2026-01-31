@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { fetchPodcasts } from "./api/fetchPodcasts";
+import { fetchPodcasts } from "./api/fetchData";
 import { PodcastGrid, Filters } from "./components/index";
 import { PodcastProvider } from "./context/PodcastContext";
 import ShowDetail from "./pages/ShowDetail";

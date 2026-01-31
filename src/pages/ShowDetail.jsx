@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { fetchSinglePodcast } from "../api/fetchData";
 import { useState, useEffect } from "react";
 import { dateFormat } from "../utils/dateFormat";
 import "./showDetail.css";
@@ -14,31 +15,15 @@ export default function ShowDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    let ignore = false;
+  
 
-    async function fetchShow() {
-      setLoading(true);
-      setError("");
-      setShow(null);
+useEffect(() => {
+  setLoading(true);
+  setError("");
+  setShow(null);
 
-      try {
-        const res = await fetch(`https://podcast-api.netlify.app/id/${id}`);
-        if (!res.ok) throw new Error(`Request failed (${res.status})`);
-        const data = await res.json();
-        if (!ignore) setShow(data);
-      } catch (err) {
-        if (!ignore) setError(err?.message || "Failed to load show details.");
-      } finally {
-        if (!ignore) setLoading(false);
-      }
-    }
-
-    fetchShow();
-    return () => {
-      ignore = true;
-    };
-  }, [id]);
+  fetchSinglePodcast(id, setShow, setError, setLoading);
+}, [id]);
 
   return (
     <main className="show-detail">
@@ -46,7 +31,10 @@ export default function ShowDetail() {
         ← Back to browsing
       </Link> 
 
-      
+    {loading && <p className="text-muted">Loading show…</p>}
+    {!loading && error && <p className="text-muted">{error}</p>}
+
+    {!loading && !error && show && (
       <div className="show-detail-cover">
         <div className="podcast-info">
           <div className="image-grid">
@@ -74,7 +62,7 @@ export default function ShowDetail() {
               <strong>Show ID:</strong> {id}
             </p>
 
-            <h3>Genres</h3>
+           { /* <h3>Genres</h3>
             <div className="genre-tags">
               {show?.genres?.length ? (
                 show.genres.map((genreId) => (
@@ -88,7 +76,7 @@ export default function ShowDetail() {
                   <span className="tag">Genre</span>
                 </>
               )}
-            </div>
+            </div>*/}
 
             <p className="text-muted">Last updated {dateFormat(show?.updated || "—")}</p>
           </div>
@@ -113,7 +101,7 @@ export default function ShowDetail() {
               );
             })}
           </div>
-          </div>
+          </div>)}
     </main>
   );
 }
