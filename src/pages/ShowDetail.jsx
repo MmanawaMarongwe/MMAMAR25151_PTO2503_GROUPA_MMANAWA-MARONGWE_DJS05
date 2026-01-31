@@ -95,16 +95,25 @@ export default function ShowDetail() {
         </div>
 
         <div>
-          <h2>Seasons</h2>
+            <h2>Seasons</h2>
 
-          <div className="season">
-            <div className="season-row">
-              <strong className="season-title">Season 1</strong>
-              <span className="episodes-count">0 episodes</span>
-            </div>
+            {(show.seasons || []).map((season, i) => {
+              const title = season.title || `Season ${i + 1}`;
+              const epCount = season.episodes?.length ?? 0;
+
+              return (
+                <div className="season" key={season.id || i}>
+                  <div className="season-row">
+                    <strong className="season-title">{title}</strong>
+                    <span className="episodes-count">
+                      {epCount} episode{epCount === 1 ? "" : "s"}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        </div>
-      </div>
+          </div>
     </main>
   );
 }
