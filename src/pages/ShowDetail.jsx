@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { dateFormat } from "../utils/dateFormat";
 /**
  * ShowDetail placeholder page.
  * Reuses layout styles from the previous modal implementation.
@@ -89,7 +90,7 @@ export default function ShowDetail() {
               )}
             </div>
 
-            <p className="text-muted">Last updated {show?.updated || "—"}</p>
+            <p className="text-muted">Last updated {dateFormat(show?.updated || "—")}</p>
           </div>
         </div>
 
