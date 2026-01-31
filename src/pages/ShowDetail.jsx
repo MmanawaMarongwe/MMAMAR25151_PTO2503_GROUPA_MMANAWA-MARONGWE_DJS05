@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { dateFormat } from "../utils/dateFormat";
+import "./showDetail.css";
 /**
  * ShowDetail placeholder page.
  * Reuses layout styles from the previous modal implementation.
@@ -43,16 +44,10 @@ export default function ShowDetail() {
     <main className="show-detail">
       <Link to="/" className="back-link">
         ← Back to browsing
-      </Link>
+      </Link> 
 
-      <h2>Podcast Details</h2>
-
-      <h2>
-        {loading && "Loading show…"}
-        {!loading && error && "Error loading show"}
-        {!loading && !error && show && show.title}
-      </h2>
-      <div>
+      
+      <div className="show-detail-cover">
         <div className="podcast-info">
           <div className="image-grid">
             <img
@@ -62,11 +57,16 @@ export default function ShowDetail() {
                   ? `${show.title} cover`
                   : "Podcast cover placeholder"
               }
-              className="modal-image"
+              className="podcast-cover"
             />
           </div>
 
           <div className="info-grid">
+            <h2>
+        {loading && "Loading show…"}
+        {!loading && error && "Error loading show"}
+        {!loading && !error && show && show.title}
+      </h2>
             <h3>Description</h3>
             <p className="text-muted">
               {show?.description || "Podcast description will appear here."}
@@ -100,7 +100,7 @@ export default function ShowDetail() {
           <div className="season">
             <div className="season-row">
               <strong className="season-title">Season 1</strong>
-              <span className="text-muted episodes-count">0 episodes</span>
+              <span className="episodes-count">0 episodes</span>
             </div>
           </div>
         </div>

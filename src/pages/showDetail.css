@@ -1,0 +1,81 @@
+
+
+/*
+=============================================================
+ SHOW DETAIL STYLES
+=============================================================
+*/
+
+
+.show-detail{
+    margin: 2rem;
+    padding: 2rem;
+}
+
+.show-detail-cover {
+  background: var(--card-bg);
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+
+/* Shared image styling */
+.podcast-cover {
+  width: 400px;
+  height: 400px;
+  margin-top: 0;
+  border-radius: 8px;
+}
+
+/* Podcast info layout */
+.podcast-info {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3rem;
+  padding: 16px;
+}
+
+.image-grid {
+  grid-column: span 3;
+  margin-top: 16px;
+}
+
+.info-grid {
+  grid-column: span 4;
+}
+
+/* Seasons */
+.season-row {
+  width: 94%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: solid 1px var(--border-line);
+  padding: 32px;
+  margin: 8px 0;
+  border-radius: 16px;
+}
+
+.season-title {
+  font-weight: 600;
+}
+
+.episodes-count {
+  color: var(--accent);
+}
+
+.genre-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+}
+
+.tag {
+  color: var(--accent);
+  background-color: #161b22;
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 12px;
+}
