@@ -1,7 +1,8 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { fetchSinglePodcast } from "../api/fetchData";
 import { useState, useEffect } from "react";
 import { dateFormat } from "../utils/dateFormat";
+import ShowDetailHeader from "./ShowDetailHeader";
 import "./showDetail.css";
 /**
  * ShowDetail placeholder page.
@@ -15,7 +16,7 @@ export default function ShowDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  
+
 
 useEffect(() => {
   setLoading(true);
@@ -27,14 +28,13 @@ useEffect(() => {
 
   return (
     <main className="show-detail">
-      <Link to="/" className="back-link">
-        ← Back to browsing
-      </Link> 
-
+     
     {loading && <p className="text-muted">Loading show…</p>}
     {!loading && error && <p className="text-muted">{error}</p>}
 
     {!loading && !error && show && (
+      <>
+       <ShowDetailHeader/>
       <div className="show-detail-cover">
         <div className="podcast-info">
           <div className="image-grid">
@@ -101,7 +101,8 @@ useEffect(() => {
               );
             })}
           </div>
-          </div>)}
+          </div>)
+          </> )}
     </main>
   );
 }
