@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { fetchSinglePodcast } from "../api/fetchData";
 import { useState, useEffect } from "react";
 import { dateFormat } from "../utils/dateFormat";
-import ShowDetailHeader from "./ShowDetailHeader";
+import {ShowCover, ShowDetailHeader} from "./index"
 import "./showDetail.css";
 /**
  * ShowDetail placeholder page.
@@ -37,17 +37,7 @@ useEffect(() => {
        <ShowDetailHeader/>
       <div className="show-detail-cover">
         <div className="podcast-info">
-          <div className="image-grid">
-            <img
-              src={show?.image || "https://via.placeholder.com/300"}
-              alt={
-                show?.title
-                  ? `${show.title} cover`
-                  : "Podcast cover placeholder"
-              }
-              className="podcast-cover"
-            />
-          </div>
+          <ShowCover image={show?.image} title={show?.title} />
 
           <div className="info-grid">
             <h2>
