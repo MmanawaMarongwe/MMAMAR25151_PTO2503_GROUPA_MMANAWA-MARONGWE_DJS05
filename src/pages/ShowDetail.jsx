@@ -4,6 +4,8 @@ import { fetchGenreTitles } from "../api/fetchGenres";
 import { useState, useEffect } from "react";
 import {ShowCover, ShowDetailHeader, ShowInfo, SeasonList, GenreTags} from "./index"
 import "./showDetail.css";
+
+
 /**
  * ShowDetail placeholder page.
  * Reuses layout styles from the previous modal implementation.
@@ -28,28 +30,24 @@ useEffect(() => {
 }, [id]);
 
 useEffect(() => {
-  let ignore = false;
-
-  async function loadGenres() {
-    if (!show?.genres?.length) {
-      setGenreTitles([]);
-      return;
-    }
-
-    try {
-      const titles = await fetchGenreTitles(show.genres);
-      if (!ignore) setGenreTitles(titles);
-    } catch (e) {
-      console.error("Failed to load genre titles:", e);
-      if (!ignore) setGenreTitles([]);
-    }
+  if (!show?.genres || show.genres.length === 0) {
+    setGenreTitles([]);
+    return;
   }
 
-  loadGenres();
+  // If genres are already strings, DO NOT FETCH
+  if (typeof show.genres[0] === "string") {
+    setGenreTitles(show.genres);
+    return;
+  }
 
-  return () => {
-    ignore = true;
-  };
+  //  Only fetch if they are numeric IDs
+  fetchGenreTitles(show.genres)
+    .then(setGenreTitles)
+    .catch((e) => {
+      console.error("Failed to load genre titles:", e);
+      setGenreTitles([]);
+    });
 }, [show?.genres]);
 
   return (
