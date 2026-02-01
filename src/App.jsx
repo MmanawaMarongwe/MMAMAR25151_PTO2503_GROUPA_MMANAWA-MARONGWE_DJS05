@@ -40,35 +40,32 @@ export default function App() {
       <Header />
 
       <ErrorBoundary>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                {error && (
-                  <p className="error">
-                    Error occurred while fetching podcasts: {error}
-                  </p>
-                )}
+        {error && (
+          <p className="error">Error occurred while fetching podcasts: {error}</p>
+        )}
 
-                {!error && loading && <p>Loading Podcasts</p>}
+        {!error && loading && <p>Loading Podcasts</p>}
 
-                {!error && !loading && (
-                  <PodcastProvider initialPodcasts={podcasts}>
+        {!error && !loading && (
+          <PodcastProvider initialPodcasts={podcasts}>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
                     <Filters />
                     <main>
                       <PodcastGrid />
                       <Pagination />
                     </main>
-                  </PodcastProvider>
-                )}
-              </>
-            }
-          />
+                  </>
+                }
+              />
 
-          {/* SHOW DETAIL PAGE (placeholder for now) */}
-          <Route path="/show/:id" element={<ShowDetail />} />
-        </Routes>
+              <Route path="/show/:id" element={<ShowDetail />} />
+            </Routes>
+          </PodcastProvider>
+        )}
       </ErrorBoundary>
     </>
   );
