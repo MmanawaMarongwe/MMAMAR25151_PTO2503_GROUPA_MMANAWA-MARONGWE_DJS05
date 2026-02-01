@@ -8,10 +8,11 @@ import "./showDetail.css";
 
 const HIDE_GENRES = new Set(["all", "featured"]);
 /**
- * ShowDetail placeholder page.
- * Reuses layout styles from the previous modal implementation.
- * Data fetching and season logic will be added incrementally.
- */
+ * ShowDetail
+ * Displays detailed information for a single podcast show, including genres and seasons.
+ *
+ * @returns {JSX.Element}
+*/
 export default function ShowDetail() {
   const { id } = useParams();
 

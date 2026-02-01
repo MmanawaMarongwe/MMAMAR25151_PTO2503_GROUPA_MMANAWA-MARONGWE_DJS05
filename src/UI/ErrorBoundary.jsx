@@ -1,8 +1,11 @@
 import React from "react";
-
 /**
- * ErrorBoundary catches rendering errors in child components
- * and displays fallback UI instead of a blank screen.
+ * ErrorBoundary
+ * Catches rendering errors and displays a fallback UI instead of crashing the app.
+ *
+ * @param {Object} props
+ * @param {import("react").ReactNode} props.children - Child components to render.
+ * @returns {JSX.Element}
  */
 export default class ErrorBoundary extends React.Component {
   constructor(props) {

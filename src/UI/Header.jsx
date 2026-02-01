@@ -2,6 +2,12 @@ import podcastLogo from "../assets/podcast-logo.png";
 import searchIcon from "../assets/search-icon.png";
 import userImg from "../assets/user-profile.png";
 
+/**
+ * Header
+ * Displays the application header and branding.
+ *
+ * @returns {JSX.Element}
+ */
 export default function Header() {
   return (
     <header className="app-header">

@@ -1,6 +1,12 @@
 import { useContext } from "react";
 import { PodcastContext } from "../context/PodcastContext";
 
+/**
+ * Pagination
+ * Renders pagination controls for navigating the podcast list.
+ *
+ * @returns {JSX.Element}
+ */
 export default function Pagination() {
   const { page, setPage, totalPages } = useContext(PodcastContext);
 

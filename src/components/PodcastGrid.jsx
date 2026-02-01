@@ -5,6 +5,12 @@ import { genreList } from "../utils/genreList.js";
 import { genres } from "../data.js";
 import { PodcastContext } from "../context/PodcastContext.jsx";
 
+/**
+ * PodcastGrid
+ * Renders a grid of podcast preview cards based on the current filters.
+ *
+ * @returns {JSX.Element}
+ */
 export default function PodcastGrid() {
   const { podcasts = [] } = useContext(PodcastContext);
 

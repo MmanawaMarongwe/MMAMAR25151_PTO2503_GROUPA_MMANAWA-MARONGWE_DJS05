@@ -2,6 +2,12 @@ import { useContext } from "react";
 import { PodcastContext } from "../context/PodcastContext";
 import { genres } from "../data.js";
 
+/**
+ * Filters
+ * Provides search, genre, and sorting controls for browsing podcasts.
+ *
+ * @returns {JSX.Element}
+ */
 export default function Filters() {
   const {
     search,
