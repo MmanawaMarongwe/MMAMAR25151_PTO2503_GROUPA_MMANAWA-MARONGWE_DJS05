@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { fetchSinglePodcast } from "../api/fetchData";
+import { fetchGenreTitles } from "../api/fetchGenres";
 import { useState, useEffect } from "react";
 import {ShowCover, ShowDetailHeader, ShowInfo, SeasonList, GenreTags} from "./index"
 import "./showDetail.css";
@@ -14,6 +15,7 @@ export default function ShowDetail() {
   const [show, setShow] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [genreTitles, setGenreTitles] = useState([]);
 
 
 
@@ -24,6 +26,31 @@ useEffect(() => {
 
   fetchSinglePodcast(id, setShow, setError, setLoading);
 }, [id]);
+
+useEffect(() => {
+  let ignore = false;
+
+  async function loadGenres() {
+    if (!show?.genres?.length) {
+      setGenreTitles([]);
+      return;
+    }
+
+    try {
+      const titles = await fetchGenreTitles(show.genres);
+      if (!ignore) setGenreTitles(titles);
+    } catch (e) {
+      console.error("Failed to load genre titles:", e);
+      if (!ignore) setGenreTitles([]);
+    }
+  }
+
+  loadGenres();
+
+  return () => {
+    ignore = true;
+  };
+}, [show?.genres]);
 
   return (
     <main className="show-detail">
@@ -47,7 +74,7 @@ useEffect(() => {
             error={error}/>
 
             <h3>Genres</h3>
-            <GenreTags tags={[]} />
+            <GenreTags tags={genreTitles} />
            
 
 
