@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { fetchSinglePodcast } from "../api/fetchData";
 import { useState, useEffect } from "react";
-import {ShowCover, ShowDetailHeader, ShowInfo} from "./index"
+import {ShowCover, ShowDetailHeader, ShowInfo, SeasonList} from "./index"
 import "./showDetail.css";
 /**
  * ShowDetail placeholder page.
@@ -68,25 +68,9 @@ useEffect(() => {
         </div>
 
         <div>
-            <h2>Seasons</h2>
-
-            {(show.seasons || []).map((season, i) => {
-              const title = season.title || `Season ${i + 1}`;
-              const epCount = season.episodes?.length ?? 0;
-
-              return (
-                <div className="season" key={season.id || i}>
-                  <div className="season-row">
-                    <strong className="season-title">{title}</strong>
-                    <span className="episodes-count">
-                      {epCount} episode{epCount === 1 ? "" : "s"}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
+            <SeasonList/>
           </div>
-          </div>)
+          </div>
           </> )}
     </main>
   );
