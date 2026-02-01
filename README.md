@@ -103,3 +103,130 @@ Since genre information is only exposed on `PREVIEW` by means of the specific `G
    - Description of main features and any known limitations.
 
 ---
+
+# 🎧 React Podcast Explorer
+
+## 🚀 Overview
+
+The **React Podcast Explorer** is a podcast browsing application that allows users to **search**, **sort**, **filter by genre**, and **paginate** through a list of podcast shows. Users can select a show to view a **dedicated show detail page** with comprehensive information, including seasons and episodes.
+
+This project builds on a previous podcast listing app and extends it by introducing **dynamic routing**, **show detail pages**, **season navigation**, and **state preservation** when navigating between pages.
+
+The application is designed to provide a **smooth and consistent user experience**, ensuring that filters and search selections remain applied when users return to the homepage.
+
+---
+
+## ✨ Features
+
+### Homepage / Listing Page
+- **Live Search**: Search podcasts by title with instant results.
+- **Sorting Options**: Sort podcasts by newest, oldest, title A–Z, or title Z–A.
+- **Genre Filtering**: Filter podcasts by genre.
+- **Pagination**: Browse podcasts in pages of 8 items.
+- **Synchronized UI Controls**: Search, sort, filter, and pagination work together seamlessly.
+- **Loading & Error States**: Clear feedback during data fetching or failures.
+- **Error Boundary Handling**: Displays a fallback UI if a component crashes.
+
+### Show Detail Page
+- **Dynamic Routing**: Each podcast has its own unique URL.
+- **Show Details**:
+  - Podcast title
+  - Large cover image
+  - Description
+  - Genre tags
+  - Last updated date (formatted)
+- **Graceful Data Handling**:
+  - Loading indicator while fetching show data
+  - User-friendly error messages
+  - Empty state handling if data is missing
+
+### Season Navigation
+- **Expandable Seasons**: Users can expand or collapse seasons to avoid long scrolling.
+- **Season Information**:
+  - Season title
+  - Episode count per season
+- **Episode Details**:
+  - Episode number
+  - Episode title
+  - Season image displayed next to episodes
+  - Shortened episode description for quick scanning
+
+### State Preservation
+- Filters, search terms, sorting, and pagination remain applied when navigating:
+  - From the homepage to a show detail page
+  - Back to the homepage from a show detail page
+
+---
+
+## 🛠️ Tech Stack
+
+- **React** (functional components & hooks)
+- **React Router** (dynamic routing)
+- **JavaScript (ES6+)**
+- **Fetch API**
+- **React Context API** (shared state management)
+- **CSS3** (responsive styling)
+
+---
+
+## 📖 How to Use
+
+1. Start the application locally or access the live demo (if available).
+2. Browse podcasts on the homepage using search, filters, and sorting options.
+3. Click on a podcast card to view its **show detail page**.
+4. Explore seasons and episodes using the **expandable season navigation**.
+5. Use the browser back button or navigation links to return to the homepage with all filters preserved.
+
+---
+
+## ⚙️ Setup Instructions
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. Navigate into the project directory:
+
+   ```bash
+   cd DJS05
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open the app in your browser:
+
+   ```
+   http://localhost:5173
+   ```
+
+---
+
+## 🧪 Code Quality
+
+- Clean, modular React component structure.
+- Reusable components for maintainability.
+- Centralised state management using React Context.
+- Dynamic routing with clear separation of concerns.
+- Major components and utilities documented using **JSDoc**.
+- Consistent formatting across JavaScript, JSX, HTML, and CSS.
+
+---
+
+## 🎯 Future Improvements
+
+- Persist filter and search state across page refreshes using localStorage.
+- Add playback functionality for episodes.
+- Improve accessibility and keyboard navigation.
+- Add animations for season expand/collapse interactions.
