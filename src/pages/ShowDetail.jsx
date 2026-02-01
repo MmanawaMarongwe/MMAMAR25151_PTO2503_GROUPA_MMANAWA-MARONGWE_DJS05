@@ -6,6 +6,7 @@ import {ShowCover, ShowDetailHeader, ShowInfo, SeasonList, GenreTags} from "./in
 import "./showDetail.css";
 
 
+const HIDE_GENRES = new Set(["all", "featured"]);
 /**
  * ShowDetail placeholder page.
  * Reuses layout styles from the previous modal implementation.
@@ -35,11 +36,18 @@ useEffect(() => {
     return;
   }
 
-  // If genres are already strings, DO NOT FETCH
+const hide = (value) => HIDE_GENRES.has(String(value).trim().toLowerCase());
+
+  // If genres are already strings (names), don't fetch, just filter and render if they are not all or featured
   if (typeof show.genres[0] === "string") {
-    setGenreTitles(show.genres);
+    const cleaned = show.genres
+      .map((g) => String(g).trim())
+      .filter((g) => g && !hide(g));
+
+    setGenreTitles(cleaned);
     return;
   }
+
 
   //  Only fetch if they are numeric IDs
   fetchGenreTitles(show.genres)
@@ -80,7 +88,7 @@ useEffect(() => {
         </div>
 
         <div>
-            <SeasonList/>
+            <SeasonList seasons={show?.seasons || []} />
           </div>
           </div>
           </> )}
