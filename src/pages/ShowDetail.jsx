@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { fetchSinglePodcast } from "../api/fetchData";
 import { useState, useEffect } from "react";
-import {ShowCover, ShowDetailHeader, ShowInfo, SeasonList} from "./index"
+import {ShowCover, ShowDetailHeader, ShowInfo, SeasonList, GenreTags} from "./index"
 import "./showDetail.css";
 /**
  * ShowDetail placeholder page.
@@ -46,22 +46,9 @@ useEffect(() => {
             loading={loading} 
             error={error}/>
 
-
-           { /* <h3>Genres</h3>
-            <div className="genre-tags">
-              {show?.genres?.length ? (
-                show.genres.map((genreId) => (
-                  <span className="tag" key={genreId}>
-                    {genreId}
-                  </span>
-                ))
-              ) : (
-                <>
-                  <span className="tag">Genre</span>
-                  <span className="tag">Genre</span>
-                </>
-              )}
-            </div>*/}
+            <h3>Genres</h3>
+            <GenreTags tags={[]} />
+           
 
 
           </div>
